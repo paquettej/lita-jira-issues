@@ -1,6 +1,6 @@
 module Lita 
   module Handlers 
-    class JiraIssue < Handler 
+    class JiraIssues < Handler 
 
       config :base_url, type: String, required: true 
       config :timeout, type: Float, default: 600.0, required: false
@@ -12,10 +12,11 @@ module Lita
       config :auth_type, type: String, required: true 
 
 
-      route %r{([A-Z]{2,}-\d+\)}i, :build_issue_link 
+      route %r{([A-Z]{2,}-\d+)}i, :build_issue_link 
 
       # build a link to ratus1 here 
       def build_issue_link(response) 
+          Lita.logger.warn "triggered "
         # don't respond to own messages -- why does this happen?
         if response.user.name == Lita.config.robot.name
           Lita.logger.warn "received message from myself, ignoring..."
@@ -71,6 +72,6 @@ module Lita
       end 
     end 
 
-    Lita.register_handler(JiraIssue) 
+    Lita.register_handler(JiraIssues) 
   end 
 end

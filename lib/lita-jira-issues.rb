@@ -8,7 +8,7 @@ require "lita/handlers/jira_issues"
 require "mention"
 require "jira_issue"
 
-Lita::Handlers::RationalChange.template_root File.expand_path(
+Lita::Handlers::JiraIssues.template_root File.expand_path(
   File.join("..", "..", "templates"),
  __FILE__
 )
